@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import Cards from "./cards";
+import EvalCards from "./Evalcards";
 class Home extends Component {
   render() {
     return (
       <div>
-        <div>PokerStars 2.0</div>
+        <div>
+          <EvalCards />
+          PokerStars 2.0
+        </div>
       </div>
     );
   }
