@@ -1,22 +1,42 @@
 import React, { Component } from "react";
 import cardsDataset from "./cardsDataset";
 class EvalCards extends Component {
-  componentDidMount() {
-    this.flop();
+  constructor(props) {
+    super(props);
+    this.state = {
+      card: null,
+      count: 0,
+      people: [],
+    };
   }
-  flop = () => {
-    var i,
-      res = 0;
-    for (i in cardsDataset) {
-      res = cardsDataset[i];
+  componentDidMount() {
+    this.loadCards();
+  }
+  loadCards = () => {
+    for (var i = 0; i < cardsDataset.length; i++) {
+      let newArr = this.state.people;
+      newArr.push(cardsDataset[i]);
+      this.setState({
+        people: newArr,
+      });
     }
-    console.log(res);
   };
+
+  flop = () => {};
   turn = () => {};
   river = () => {};
   dealhands = () => {};
+
   render() {
-    return <div>Hel,oo poker</div>;
+    return (
+      <div>
+        {" "}
+        {this.state.people.map((person, s) => {
+          return <div key={s}>{person.cards}</div>;
+        })}
+        ;
+      </div>
+    );
   }
 }
 export default EvalCards;
