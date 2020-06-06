@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import EvalCards from "./Evalcards";
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   render() {
     return (
       <div>
