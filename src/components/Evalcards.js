@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import cardsDataset from "./cardsDataset";
+import { Button } from "react-bootstrap";
 import "./Evalcards.css";
 class EvalCards extends Component {
   constructor(props) {
@@ -63,9 +64,16 @@ class EvalCards extends Component {
           return <div key={s.id}>{person.cards}</div>;
         })}
         <div>
-          <button onClick={this.flop}>Flop</button>
-          <button onClick={this.turn}>Turn</button>
-          <button onClick={this.river}>River</button>
+          <Button size="md" variant="warning" onClick={this.flop}>
+            Flop
+          </Button>
+          <br></br>
+          <Button size="md" variant="success" onClick={this.turn}>
+            Turn
+          </Button>
+          <Button size="md" variant="danger" onClick={this.river}>
+            River
+          </Button>
         </div>
       </div>
     );
