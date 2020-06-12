@@ -58,7 +58,7 @@ class EvalCards extends Component {
             ) : (
               <span style={{ color: "blue" }} />
             )}
-            <Timer.Seconds /> Seconds
+            <Timer.Seconds /> Second
           </Timer>
         </div>
         <div className="pokerButtons">
