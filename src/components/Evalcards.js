@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import cardsDataset from "./cardsDataset";
 import { Button } from "react-bootstrap";
 import "./Evalcards.css";
+import Timer from "react-compound-timer";
 class EvalCards extends Component {
   constructor(props) {
     super(props);
@@ -10,11 +11,13 @@ class EvalCards extends Component {
       people: [],
       flopFlag: false,
       turnFlag: false,
+      time: 0,
       riverFlag: false,
     };
   }
   componentDidMount() {
     this.loadCards();
+    this.setState({ time: 30000 });
   }
   loadCards = () => {
     for (let i in cardsDataset) {
@@ -44,44 +47,31 @@ class EvalCards extends Component {
     this.setState({ riverFlag: true });
   };
   dealhands = () => {};
-  /*onload = function () {
-    var thirtySec = 30,
-      display = document.querySelector("#time");
-    startTimer(thirtySec, display);
-  };*/
-
-  startTimer(duration, display) {
-    var timer = duration,
-      minutes,
-      seconds;
-    setInterval(function () {
-      minutes = parseInt(timer / 60, 10);
-      seconds = parseInt(timer % 60, 10);
-
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      display.textContent = minutes + ":" + seconds;
-
-      if (--timer < 0) {
-        timer = duration;
-      }
-    }, 1000);
-  }
 
   render() {
     return (
       <div>
-        <Button size="md" variant="warning" onClick={this.flop}>
-          Flop
-        </Button>
-
-        <Button size="md" variant="success" onClick={this.turn}>
-          Turn
-        </Button>
-        <Button size="md" variant="danger" onClick={this.river}>
-          River
-        </Button>
+        <div className="clock">
+          <Timer direction="backward" initialTime={this.state.time}>
+            {this.state.time <= 20000 ? (
+              <span style={{ color: "red" }} />
+            ) : (
+              <span style={{ color: "blue" }} />
+            )}
+            <Timer.Seconds /> Seconds
+          </Timer>
+        </div>
+        <div className="pokerButtons">
+          <Button size="md" variant="warning" onClick={this.flop}>
+            Flop
+          </Button>
+          <Button size="md" variant="success" onClick={this.turn}>
+            Turn
+          </Button>
+          <Button size="md" variant="danger" onClick={this.river}>
+            River
+          </Button>
+        </div>
         <br />
         <div className="container">
           {this.state.flopFlag ? (
