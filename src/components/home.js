@@ -12,8 +12,9 @@ class Home extends Component {
       <div className="Body">
         <div>
           <EvalCards />
-          PokerStars 2.0
+         Raj Casino
         </div>
+        <footer><span><small>Powered by PokerStars</small></span></footer>
       </div>
     );
   }

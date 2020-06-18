@@ -7,12 +7,14 @@ class EvalCards extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // count: 0,
       people: [],
       flopFlag: false,
       turnFlag: false,
       time: 0,
       riverFlag: false,
+      flopDisable: false,
+      turnDisable: true,
+      riverDisable: true,
     };
   }
   componentDidMount() {
@@ -27,8 +29,8 @@ class EvalCards extends Component {
         people: newArr,
       });
     }
-    // console.log(this.state.people);
   };
+
   shuffleFisherYates(array) {
     let i = array.length;
     while (i--) {
@@ -37,18 +39,23 @@ class EvalCards extends Component {
     }
     return array;
   }
+
   flop = () => {
-    this.setState({ flopFlag: true });
+    this.setState({ flopFlag: true, turnDisable: false });
   };
   turn = () => {
-    this.setState({ turnFlag: true });
+    this.setState({ turnFlag: true, riverDisable: false });
   };
   river = () => {
     this.setState({ riverFlag: true });
   };
-  dealhands = () => {};
+  dealhands = (cardsDataset) => {
+    this.setState({ turnDisable: true, riverDisable: true });
+    this.shuffleFisherYates(cardsDataset);
+  };
 
   render() {
+    //  var time=30000;
     return (
       <div>
         <div className="clock">
@@ -62,14 +69,34 @@ class EvalCards extends Component {
           </Timer>
         </div>
         <div className="pokerButtons">
-          <Button size="md" variant="warning" onClick={this.flop}>
+          <Button
+            size="md"
+            variant="warning"
+            disabled={this.state.flopDisable}
+            onClick={this.flop}
+          >
             Flop
           </Button>
-          <Button size="md" variant="success" onClick={this.turn}>
+          <Button
+            size="md"
+            variant="success"
+            disabled={this.state.turnDisable}
+            onClick={this.turn}
+          >
             Turn
           </Button>
-          <Button size="md" variant="danger" onClick={this.river}>
+          <Button
+            size="md"
+            variant="danger"
+            disabled={this.state.riverDisable}
+            onClick={this.river}
+          >
             River
+          </Button>
+          <br />
+          <br></br>
+          <Button size="md" variant="info" onClick={this.dealhands}>
+            Deal New Hands
           </Button>
         </div>
         <br />
